@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="initial-scale=1, width=device-width">
+        <title>Plauschgruppe</title>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX"></script>
+    	<script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() { dataLayer.push(arguments); }
+            gtag('js', new Date());
+            gtag('config', 'G-QEKY5N7MNY'); 
+        </script>
+        <style>
+          html {
+            overflow-y: scroll;
+          }
+
+          body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+          }
+
+          header {
+            background-color: lightblue;
+            text-align: center;
+            padding: 10px 0;
+          }
+
+          .header-container {
+            margin: 0 auto;
+            max-width: 1200px;
+         }
+
+          .topnav {
+            overflow: hidden;
+            background-color: grey;
+            margin: 0;
+            padding: 0;
+            z-index: 1;
+          }
+          
+          .topnav a {
+            float: left;
+            display: block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 12px 14px;
+            text-decoration: none;
+          }
+          .navbar a:hover {
+            background-color: lightblue;
+            font-size: 18px;
+          }  
+
+          footer {
+            margin-top: 100px;
+            font-size: smaller; 
+            font-family: Arial; 
+            color: lightblue; 
+            text-align: center;
+          }
+
+          Responsive Design 
+          @media (max-width: 768px) {
+            .content {
+            flex-direction: column; 
+            }
+          }  
+          
+        </style>
+    </head>
+    <body>
+      <header class="header_container">
+        <h1 style="color:#08088A; text-align: center; text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);">Plauschgruppe Golfclub Bad Ragaz</h1>
+      </header>
+      
+      <div class="topnav">
+        <a href="{{ url_for('index') }}">Home</a>
+        <a href="{{ url_for('program') }}">Programm 2025</a>
+        <a href="{{ url_for('special') }}">Spezielle Informationen</a>
+        <a href="{{ url_for('gallery') }}">Foto Gallerie</a>
+      </div>
+        {% block content %}
+
+        {% endblock %}
+      </div>
+      <footer>
+        &copy; 2024 Marcus Lütolf
+      </footer>
+    </body>
+</html>

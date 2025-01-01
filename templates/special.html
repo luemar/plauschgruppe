@@ -1,0 +1,230 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+ 
+    .background-section {
+        /*background-color: #f0f0f0;*/
+        background-image: url('{{ url_for('static', filename="signature.jpg") }}');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center top;
+        min-height: 750px;
+        position: relative; /* Allows positioning child elements within this container */
+        margin: 0;
+        padding: 0;
+    }
+
+    form {
+        text-align: center;
+        margin: 20px auto;
+    }
+
+    form label {
+        font-family: Verdana, sans-serif;
+        color: #08088A;
+    }   font-size: 1em;
+        
+    form button {
+        margin-left: 10px;
+        font-size: 1.0em;
+        color: #08088A;
+    }
+
+    form button:hover {
+        background-color: light-gray;
+    }
+    #result_1 {
+        margin-top: 15px;
+        color: #08088A;
+        text-align: center;
+        font-size: 1.2em;
+        font-family: Verdana, sans-serif;
+        font-weight: bold;
+    }
+
+    .result_2-container {
+        min-height: 50px; /* Reserve a fixed height */
+        margin: 20px auto;  /* Centers the container itself */
+        text-align: center;
+    }
+
+    #result_2 {
+        visibility: hidden;
+        color: #08088A;
+        font-size: 1.0em;
+        font-family: Verdana, sans-serif;
+        font-weight: bold;
+        padding: 0; /* Reset padding */
+    }
+
+    #result_2-error {
+        color: magenta;
+        text-align: center;
+        font-size: 1.0em;
+        font-family: Verdana, sans-serif;
+        font-weight: normal;
+    }
+
+    .calc_age{
+        margin-top: 20px;
+        color: #08088A;
+        text-align: center;
+        font-size: 1em;
+        font-family: Verdana, sans-serif;
+        font-weight: bold;
+        margin-bottom: 1px;
+    }
+
+    .sozial{
+        margin-top: 15px;
+        color: grey;
+        text-align: center;
+        font-size: 1.2em;
+        font-family: Verdana, sans-serif;
+        font-weight: normal;
+        margin-bottom: 1px;
+    }
+
+    .form{
+        margin: 2px 0;
+        padding: 0;
+        color: grey;
+    }
+    
+    .table-container {
+        margin-top: 10px;
+    }
+
+    .table-container table {
+        margin: 0 auto; /* Center the table horizontally */
+        width: 90%; /* Table width adjusts with the viewport */
+        max-width: 1000px; /* Optional: Set a maximum width for larger screens */
+        table-layout: auto;
+        border-collapse: collapse;
+        color: dimgrey;
+    }
+
+    .table-container th {
+        font-size: clamp(12px, 1.5vw, 12px); /* Dynamic font size for headers */
+        font-weight: normal; /* Set font-weight to normal */
+        text-align: center; /* Center align text */
+        border: 1px solid gray; /* Gray borders for cells */
+        padding: 0.2em; /* Responsive padding */
+    }
+
+
+    .table-container td {
+        font-size: clamp(12px, 1.5vw, 12px); /* Dynamic font size for table cells */
+        border: 1px solid gray; /* Gray borders for cells */
+        text-align: center; /* Center align text */
+        vertical-align: middle; /* Vertically align text */
+        padding: 0.2em; /* Responsive padding */
+        /*word-wrap: break-word; Ensure long text wraps within the cell */
+    }
+
+    /* First Column Styling */
+    .table-container td:first-child {
+        font-size: clamp(12px, 1.5vw, 12px); /* Ensure first column text also shrinks dynamically */
+    }
+
+    /* Responsive Media Query for Small Screens */
+    @media (max-width: 400px) {
+        .table-container table {
+            width: 100%; /* Full width for small screens */
+        }
+        
+	 .table-container th, .table-container td {
+            font-size: 12px; /* Set a fixed, readable font size */
+    	}
+    }   
+    #result_2, #result_2-error {
+    /* Ensure initial state is visible */
+        display: block;
+        visibility: visible;
+        opacity: 1;
+        /* Set up the transition */
+        transition: opacity 0.75s ease-in-out;
+    }
+</style>
+<body>
+    <div class="background-section">
+        {% if result_1 %}
+            <p id="result_1">Durchschnittsalter heute: {{ result_1 }} Jahre</p>
+        {%endif %}
+
+        <p class="calc_age">exakte Altersberechnung:</p>
+        
+        <form class="form" method="POST">
+            <label for="name">Eingabe Namen</label>
+            <input type="text" id="name" name="name" placeholder="Name Vorname wie in Tabelle" required style="width: 250px">
+            <button type="submit">Eingabe</button>
+        </form>
+
+        <div class="result_2-container" id="result_2-container">   
+            {% if result_2 %}
+                <p id="result_2">                  
+                    {{ input_name}} ist {{ result_2[0] }} Jahre, {{ result_2[1] }} Monate und {{ result_2[2] }} Tage alt
+                </p>
+            {% endif %}   
+      
+            {% if error_message %}
+                <p id="result_2-error">
+                    {{ error_message }}
+                </p>
+            {% endif %} 
+        </div>
+
+        <h3 style="color: gray; text-align:center; font-size 14px; font-familiy:Verdana;">Berechnung Sozialbeiträge</h3>
+        <div class="table-container">
+            {% if result_3 %}
+                {{ result_3 | safe }}
+            {% endif %}
+        </div> 
+    </div>       
+
+    <script src="{{ url_for('static', filename='script.js', v=version) }}"></script>
+
+    <script>
+        window.onload = function() {
+  	  // Debug logging
+    	console.log("Script initialized");
+    
+    	function fadeAndHideElement(elementId) {
+            const element = document.getElementById(elementId);
+            console.log(`Looking for element with id: ${elementId}`);
+            console.log(`Element found:`, element);
+        
+            if (element) {
+                console.log(`Initial visibility: ${element.style.visibility}`);
+                console.log(`Initial opacity: ${element.style.opacity}`);
+            
+                // Force initial state
+                element.style.display = 'block';
+                element.style.visibility = 'visible';
+                element.style.opacity = '1';
+            
+                console.log(`Element ${elementId} set to visible`);
+            
+                // Start fade after 6 seconds
+                setTimeout(function() {
+                    console.log(`Starting fade for ${elementId}`);
+                    element.style.opacity = '0';
+                
+                    // Hide after fade completes
+                    setTimeout(function() {
+                        element.style.visibility = 'hidden';
+                        console.log(`${elementId} hidden`);
+                     }, 750);
+                }, 6000);
+            }
+        }
+
+        // Try to fade both elements
+        fadeAndHideElement('result_2');
+        fadeAndHideElement('result_2-error');
+    };
+    </script>
+
+</body>
+{% endblock %}

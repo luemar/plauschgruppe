@@ -1,0 +1,64 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<style>          
+    .content {
+        display: flex;
+        flex-wrap: wrap; /* Allows columns to wrap for responsiveness */
+          }
+          
+    .column {
+        padding: 15px;
+        min-width: 100%; /* Ensure full width */
+    }
+          
+    .sidebar {
+        background: light-gray;
+        flex: 1; /* Smallest column */
+        min-width: 200px;
+    }
+        
+    .extra {
+        background: light-gray;
+        flex: 1; /* Medium column */
+        min-width: 200px;
+        }
+          
+    .sidebar img {
+        max-width: 100%; /* Ensures the image does not overflow the column */
+        height: 400px;    /* Maintains the image aspect ratio */
+        width:750px;
+        object-fit: cover;
+        display: block;  /* Removes any inline spacing issues */
+        margin: 0 auto; 
+        } 
+    .extra img {
+        max-width: 100%; /* Ensures the image does not overflow the column */
+        height: 400px; 
+        width: 750px;   /* Maintains the image aspect ratio */
+        object-fit: cover;
+        display: block;  /* Removes any inline spacing issues */
+        margin: 0 auto; 
+        }
+
+</style>
+</head>
+<body>
+    <main class="content">
+        <div class="column sidebar">
+          <img src="{{ url_for('static', filename='SouthbroomGC.jpg')}}" alt="Testbild" class="sidebar-image">
+          <figcaption style="color:royalblue; font-family:Arial;">Southbroom GC, 18.Grün</figcaption>
+        </div>
+       
+        <div class="column extra">
+          <img src="{{ url_for('static', filename='Umdoni.jpg') }}" alt="Testbild"class="sidebar-image">
+          <figcaption style="color:royalblue; font-family:Arial;">Umdoni Golf Park</figcaption>
+        </div>
+    </main>
+    <div>
+         <h3 style="color:royalblue; font-family:Verdana; text-align: center;">
+          Fotos von wunderbaren Golfplätzen in Südafrika an der Southcoast am Indischen Ozean<br>für weiter Informationen auf weisse Links oben klicken
+    </div>
+
+{% endblock %}

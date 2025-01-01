@@ -1,0 +1,86 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+<style>          
+    .content {
+        display: flex;
+        flex-wrap: wrap; /* Allows columns to wrap for responsiveness */
+          }
+          
+    .column {
+        padding: 15px;
+        min-width: 100%; /* Ensure full width */
+    }
+          
+    .sidebar {
+        background: light-gray;
+        flex: 1; /* Smallest column */
+        min-width: 150px;
+    }
+        
+    .extra {
+        background: light-gray;
+        flex: 1; /* Medium column */
+        min-width: 200px;
+        }
+          
+    .sidebar img {
+        max-width: 100%; /* Ensures the image does not overflow the column */
+        height: 400px;    /* Maintains the image aspect ratio */
+        width:600px;
+        object-fit: cover;
+        display: block;  /* Removes any inline spacing issues */
+        margin: 0 auto; 
+        } 
+    .extra img {
+        max-width: 100%; /* Ensures the image does not overflow the column */
+        height: 400px; 
+        width: 600px;   /* Maintains the image aspect ratio */
+        object-fit: cover;
+        display: block;  /* Removes any inline spacing issues */
+        margin: 0 auto; 
+        }
+        .image-container {
+            margin-top: 60px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            align-items: center;
+            color: darkblue;
+
+        }
+
+        .fixed-size-image {
+            width: 150px;
+            /* Fixed width */
+            height: 150px;
+            /* Fixed height */
+            object-fit: cover;
+        }
+
+</style>
+</head>
+<body>
+    <div class="image-container">
+        <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240618141932/61M1WuTUcUL_AC_UF10001000_QL80_-(1).jpg"
+            alt="photo" class="fixed-size-image" />
+        <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240618140923/asus.jpg" 
+             alt="photo"
+            class="fixed-size-image" />
+        <img src=
+"https://media.geeksforgeeks.org/wp-content/uploads/20240618140635/microsoft.jpeg" 
+             alt="photo"
+            class="fixed-size-image" />
+        <!-- Add more images as needed -->
+    </div>
+    <div>
+        <h3 class="image-container">In Bearbeitung</h3>
+    </div>
+</body>   
+   
+
+{% endblock %}

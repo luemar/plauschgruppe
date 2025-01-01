@@ -1,0 +1,80 @@
+{% extends "layout.html" %}
+
+{% block content %}
+<style>
+  
+  .background-section {
+      background-color: #f0f0f0;
+      background-image: url('{{ url_for('static', filename="signature.jpg") }}');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center;
+      min-height: 750px;
+      position: relative;
+      margin: 0;
+      padding: 0;
+      }
+        
+  .background-section h3 {
+      position: absolute;
+      top: 12%;
+      left: 50%; 
+      transform: translate(-50%, -50%); 
+      color: skyblue; 
+      font-size: 2em;
+      font-family: Verdana, sans-serif;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+      text-align: center;
+      }
+
+    .background-section h4 {
+      position: absolute;
+      top: 0%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: skyblue;
+      font-size: 2em;
+      font-family: Verdana, sans-serif;
+      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+      text-align: center;
+      }
+
+    .program-list {
+      position: absolute;
+      top: 17%; 
+      left: 35%;
+      transform: translateX(-25%);
+      color: royalblue;
+      font-size: 1.2em;
+      font-family: Verdana, sans-serif;
+      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.7); 
+      text-align: left;
+      list-style-type: none; 
+      padding: 0;
+      }
+        
+    .program-list li {
+      margin: 9px;
+      }
+
+</style>
+</head>
+<body>
+    <div class="background-section">
+      <h3>Programm 2025</h3>
+      <ul class="program-list">
+        <li>Di 07.01.2025: Lunch Pizzeria Cosa Nostra, Bahnhofstrasse 85, Mels</li>
+        <li>Mi 19.02.2025: Lunch</li>
+        <li>Mi 16.04.2025: Golf in Bad Ragaz</li>
+        <li>Mi 14.05.2025: Info folgt</li>
+        <li>Mi 11.06.2025: Info folgt</li>
+        <li>Mi 09.-10.07.2025: Info folgt</li>
+        <li>Mi 30.05.2025: Info folgt</li>
+        <li>Mi 14.07.2025: Info folgt</li>
+        <li>Mi 20.08.2025: Info folgt</li>
+        <li>Mi 08.10.2025: Golf in Bad Ragaz</li>
+        <li>So/Mo 12./13.-17./18.10.2025: Herbstreise Varna/Bulgarien</li>
+      </ul>
+    </div>
+ 
+{% endblock %}
