@@ -4,23 +4,20 @@ from openpyxl import workbook, load_workbook
 import pandas as pd
 import os, time
 from dateutil.relativedelta import relativedelta
-import warnings
-
-warnings.filterwarnings('ignore', category=UserWarning, module='openpyxl')
-#workbook = load_workbook('PG_2024.xlsx')
 
 app = Flask(__name__)
 app.secret_key = 'Golf3001' 
 
-#file_path = os.path.join(os.getcwd(), 'F:/Eigene Dateien F/Golf/Plauschgruppe/PG_2024.xlsx')
 file_path = os.path.join(app.static_folder, 'PG_2024.xlsx')  
 
-if os.path.exists(file_path):
-    workbook = load_workbook(file_path)  # Load the workbook
+if not os.path.exists(file_path):
+    raise FileNotFoundError(f"Excel file not found at{file_path}")
+
+try:
+    workbook = load_workbook(file_path)  
     sheet = workbook["ages"]
-else:
-    raise FileNotFoundError(f"Excel file not found at {excel_file}") 
-    workbook = None 
+except Exception as e:
+    raise Exception(f"Error loading excel_file: {str(e)}")
 
 age_list = []
 for col in sheet.iter_cols(min_row=2, min_col=3, max_col=3, max_row=13):
@@ -75,7 +72,6 @@ def calculate_indiv_age(birthdate):
     return years, months, days
     
 def excel_table():
-    #excel_file_path = os.path.join(os.getcwd(), 'F:/Eigene Dateien F/Golf/Plauschgruppe/PG_2024.xlsx')
     excel_file_path = os.path.join(app.static_folder, 'PG_2024.xlsx')
     try:
         df = pd.read_excel(excel_file_path, sheet_name="points")
